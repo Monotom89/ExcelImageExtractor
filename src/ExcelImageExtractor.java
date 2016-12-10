@@ -34,7 +34,6 @@ public class ExcelImageExtractor extends Application
         gp.setPadding(new Insets(20.0));
         gp.setAlignment(Pos.CENTER);
 
-
         Label lbTop = new Label();
         lbTop.setText("Noch keine Excel-Datei ausgewählt");
         GridPane.setRowIndex(lbTop, 0);
@@ -58,7 +57,6 @@ public class ExcelImageExtractor extends Application
         GridPane.setMargin(buRight, new Insets(10.0));
         gp.getChildren().add(buRight);
 
-
 		hauptFenster.setTitle("Menu");
 		hauptFenster.setScene(new Scene(gp, 500, 100));
 		hauptFenster.show();
@@ -75,15 +73,13 @@ public class ExcelImageExtractor extends Application
 
         lb.setText(dateiPfad);
     }
-
-    
     
     private void bilderExtrahieren(Stage hf, Label lb)
     {
     	//Neuen Unterordner erstellen aus Dateinamen
     	String ExcelDatei = lb.getText();
-    	String DateiName = ExcelDatei.substring(ExcelDatei.lastIndexOf("/")+1, ExcelDatei.indexOf("."));
-    	String parentDir = ExcelDatei.substring(0, ExcelDatei.lastIndexOf("/"));
+    	String DateiName = ExcelDatei.substring(ExcelDatei.lastIndexOf(File.separator)+1, ExcelDatei.indexOf("."));
+    	String parentDir = ExcelDatei.substring(0, ExcelDatei.lastIndexOf(File.separator));
     	new File(parentDir + "/" + DateiName + " Extracted Images").mkdir();
     	
     	//File duplizieren, damit die alte Excel bestehen bleibt
@@ -124,7 +120,7 @@ public class ExcelImageExtractor extends Application
     		{
     			try
     			{
-					DateiKopieren(child, new File(ParentDirFile + child.toString().substring(child.toString().lastIndexOf("/"), child.toString().length())));
+					DateiKopieren(child, new File(ParentDirFile + child.toString().substring(child.toString().lastIndexOf(File.separator), child.toString().length())));
 		    		System.out.println("Bilder kopiert");
 
     			} catch (IOException e)
@@ -152,12 +148,7 @@ public class ExcelImageExtractor extends Application
     		
     	
     }
-    
-    
-    
-    
-    
-    
+      
     private static void DateiKopieren(File source, File dest) throws IOException {
     //Übergeben werden muss der komplette neue Filename, nicht nur das Parent-Directory!	
     	
@@ -176,11 +167,6 @@ public class ExcelImageExtractor extends Application
             os.close();
         }
     }
-    
-    
-    
-    
-    
     
     public void unZip(String zipFile, String outputFolder){
 
@@ -220,10 +206,7 @@ public class ExcelImageExtractor extends Application
           ex.printStackTrace();
        }
       }
-    
-    
-    
-    
+   
     public static void delete(File file) throws IOException
     {
 		if(file.isDirectory())//directory is empty, then delete it
